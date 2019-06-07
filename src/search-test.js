@@ -14,8 +14,13 @@ class SearchTest extends HTMLElement {
         this.$searchButton.addEventListener('click', this._getData.bind(this))
     }
 
-    _getData() {
-        console.log('clicked get data')
+    _getData(e) {
+        console.log('clicked get data', e)
+
+        const events = window.Core.start(window.Events);
+        console.log('events', events)
+        events.fireEvent('clicked-button', e.isTrusted)
+        // window.Events.fireEvent('clicked button', e)
         // tell core that button was clicked
         // core tells getData
     }

@@ -1,8 +1,8 @@
 DataRetrieve = function() {
     let data = {}
     return {
-      testData: () => {
-        console.log('in the test data')
+      getApiData: () => {
+        console.log('calling getAPI data')
       }
     }
 };

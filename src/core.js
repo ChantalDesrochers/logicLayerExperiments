@@ -9,7 +9,10 @@ Core = function() {
             return plugins[module] = fn;
         },
         start: function(module) {
-            return plugins[module].init();
+            return module()
+        },
+        notify: function(module, event, data) {
+            // return plugins[module].init();
         },
         stop: function(module) {
             return plugins[module].destroy();
