@@ -1,25 +1,26 @@
-Core = function() {
+Core = function () {
     console.log('core has been instantiated')
     let plugins = {};
     return {
         register: (module, fn) => {
             console.log(`registering ${module}`)
-            console.log('plugins', plugins)
+            console.log('all plugins', plugins)
             return plugins[module] = fn;
         },
         start: (module) => {
             console.log(`starting ${module}`)
-            return module();
+            return plugins[module]();
         },
-        callFn: (module, method, ...args) => {
+        routeFn: (module, method, ...args) => {
             const plugin = plugins[module]()
             const fn = plugin[method]
-            return fn(...args)
+            try {
+                return fn(...args)
+            } catch (e) {
+                console.log(e)
+            }
         },
-        notify: function(module, event, data) {
-            // return plugins[module].init();
-        },
-        stop: function(module) {
+        stop: function (module) {
             return plugins[module].destroy();
         }
     }

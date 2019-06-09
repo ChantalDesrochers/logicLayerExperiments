@@ -1,8 +1,14 @@
 Cache = function() {
     let cache = {}
     return {
-      testCache: () => {
-        console.log('in the test cache')
+      set: (key, value) => {
+        window.localStorage.setItem(key, value)
+      },
+      get: (key) => {
+        return window.localStorage.getItem(key);
+      },
+      clearAllCache: () => {
+
       }
     }
   };
