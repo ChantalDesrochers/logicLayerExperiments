@@ -21,6 +21,7 @@ class SearchTest extends HTMLElement {
         this.$breedButton.addEventListener('click', this._getDogBreeds.bind(this))
         this.$imageDiv = this._shadowRoot.querySelector('#image');
         this.$breedList = this._shadowRoot.querySelector('ul');
+        // setting listeners - is this where this is supposed to be done?
         window.Core.routeFn('events', 'listen','photoRetrieved', this._populateImage.bind(this))
         window.Core.routeFn('events', 'listen','dogBreedsRetrieved', this._populateList.bind(this))
     }
@@ -49,7 +50,6 @@ class SearchTest extends HTMLElement {
           .then((data => {
             window.Core.routeFn('events', 'notifyEvent', 'dogBreedsRetrieved', data)
             window.Core.routeFn('cache', 'set', 'DOGBREEDS', data)
-              console.log('dog breeds data', data)
           }))
             .then(resolve, reject);
         });
