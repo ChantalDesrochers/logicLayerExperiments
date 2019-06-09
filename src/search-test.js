@@ -2,6 +2,7 @@ const template = document.createElement('template');
 template.innerHTML = `
 <div>
     <button>Retrieve Data</button>
+    <img id="image"></img>
 </div>
 `;
 
@@ -12,17 +13,21 @@ class SearchTest extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
         this.$searchButton = this._shadowRoot.querySelector('button');
         this.$searchButton.addEventListener('click', this._getData.bind(this))
+        this.$imageDiv = this._shadowRoot.querySelector('#image');
     }
 
-    _getData(e) {
-        console.log('clicked get data', e)
+    _getData() {
+            return new Promise((resolve, reject) => {
+              return window.Core.callFn('dataretrieve', 'getApiData')
+              .then((data => {
+                  this._populateImage(data)
+              }))
+                .then(resolve, reject);
+            });
+    }
 
-        const events = window.Core.start(window.Events);
-        console.log('events', events)
-        events.fireEvent('clicked-button', e.isTrusted)
-        // window.Events.fireEvent('clicked button', e)
-        // tell core that button was clicked
-        // core tells getData
+    _populateImage(image) {
+        this.$imageDiv.setAttribute('src', image)
     }
 }
 

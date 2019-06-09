@@ -2,14 +2,19 @@ Core = function() {
     console.log('core has been instantiated')
     let plugins = {};
     return {
-        register: function(module, fn) {
+        register: (module, fn) => {
             console.log(`registering ${module}`)
-            // plugins[module] = fn;
             console.log('plugins', plugins)
             return plugins[module] = fn;
         },
-        start: function(module) {
-            return module()
+        start: (module) => {
+            console.log(`starting ${module}`)
+            return module();
+        },
+        callFn: (module, method, ...args) => {
+            const plugin = plugins[module]()
+            const fn = plugin[method]
+            return fn(...args)
         },
         notify: function(module, event, data) {
             // return plugins[module].init();

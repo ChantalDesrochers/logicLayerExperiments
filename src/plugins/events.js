@@ -6,10 +6,10 @@ Events = function() {
         const event = new CustomEvent(eventName, { detail: data })
         console.log('xxx event in event service - dispatch', event)
         window.dispatchEvent(event)
-      }
-      // notify: (plugin, data) => {
-
-      // },
+      },
+      listen: (type, cb) => {
+        window.addEventListener(type, cb)
+      },
       // listen: (event)
       // testCache: () => {
       //   console.log('in the test events')
