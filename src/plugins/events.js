@@ -10,5 +10,9 @@ Events = () => {
         // add event listener to the window
         window.addEventListener(type, cb)
       },
+      requestData: (plugin, dataMethod, args) => {
+        // route data requests through the events instead of directly to the data-retrieve plugin
+        window.Core.routeFn(plugin, dataMethod, args)
+      }
     }
   }

@@ -10,7 +10,7 @@ template.innerHTML = `
 </div>
 `;
 
-class SearchTest extends HTMLElement {
+class DogsSearch extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({ 'mode': 'open'});
@@ -21,7 +21,7 @@ class SearchTest extends HTMLElement {
         this.$breedButton.addEventListener('click', this._getDogBreeds.bind(this))
         this.$imageDiv = this._shadowRoot.querySelector('#image');
         this.$breedList = this._shadowRoot.querySelector('ul');
-        // setting listeners - is this where this is supposed to be done?
+        // setting listeners as example
         window.Core.routeFn('events', 'listen','photoRetrieved', this._populateImage.bind(this))
         window.Core.routeFn('events', 'listen','dogBreedsRetrieved', this._populateList.bind(this))
     }
@@ -42,7 +42,7 @@ class SearchTest extends HTMLElement {
             // Resolve early if cached data exists.
             if (cachedData) {
                 cachedData = cachedData.split(',')
-            window.Core.routeFn('events', 'notifyEvent', 'dogBreedsRetrieved', cachedData)
+                window.Core.routeFn('events', 'notifyEvent', 'dogBreedsRetrieved', cachedData)
               resolve(cachedData);
               return;
             }
@@ -68,4 +68,4 @@ class SearchTest extends HTMLElement {
     }
 }
 
-window.customElements.define('search-test', SearchTest)
+window.customElements.define('dogs-search', DogsSearch)
